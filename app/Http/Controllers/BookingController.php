@@ -780,7 +780,7 @@ class BookingController extends Controller
                 $arrData['ck_20'] += $item->total_price*0.20;
             }
         }
-        //dd($arrData);
+        dd($arrData);
         $agent = new Agent();
         if(Auth::user()->role == 1){
             if($agent->isMobile()){
