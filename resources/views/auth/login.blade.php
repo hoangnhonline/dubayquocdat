@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>DÙ BAY QUỐC ĐẠT - Đăng nhập hệ thống</title>
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="images/logo.jpg" />
+    <meta property="og:image" content="images/logo.png" />
     <meta name="robots" content="noindex">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">    
     
@@ -169,7 +169,7 @@ body {
 <div class="module form-module"> 
   <div class="form">
   <div style="text-align: center">    
-    <img src="{{ asset('assets/images/logo.jpg') }}" width="200">
+    <img src="{{ asset('assets/images/logo.png') }}" width="250">
   </div>
     @if(Session::has('error'))
         <div class="alert alert-danger">
