@@ -57,16 +57,8 @@
                     <option value="2"  {{  old('status', $detail->status) == 2 ? "selected" : "" }}>Đã thanh toán</option>
                     <option value="3"  {{  old('status', $detail->status) == 3 ? "selected" : "" }}>Thanh toán sau</option>
                   </select>
-                </div>
-                <div class="form-group col-md-4 col-xs-6">
-                   <label>Bãi biển</label>
-                      <select name="beach_id" id="beach_id" class="form-control select2">
-                        @foreach($beachList as $beach)
-                        <option value="{{ $beach->id }}" {{ old('beach_id', $detail->beach_id) == $beach->id ? "selected" : "" }}>{{ $beach->name }}</option>
-                        @endforeach      
-                      </select>
-                 </div>
-                 <div class="form-group col-xs-6 col-md-4">
+                </div>                
+                 <div class="form-group col-xs-12">
                 @php
                     if($detail->date_use){
                         $date_use = old('date_use', date('d/m/Y', strtotime($detail->date_use)));
@@ -76,11 +68,7 @@
                   @endphp
                 <label for="email">Ngày</label>
                  <input type="text" name="date_use" class="form-control datepicker" value="{{ old('date_use', $date_use) }}" autocomplete="off">
-                </div>   
-                 <div class="form-group col-md-12 col-xs-12">
-                  <label for="email">BOOKING ID <span style="color: red">(code1, code2, code3, code4 ....)</span></label>
-                  <input type="text" name="booking_id" class="form-control" value="{{ old('booking_id', $detail->booking_id) }}" autocomplete="off">
-                </div>
+                </div>                    
               </div>
               <div class="row"> 
                  <div class="form-group col-md-12 col-xs-12">                    

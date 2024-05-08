@@ -22,29 +22,9 @@
       <a href="{{ route('cost.create',['date_use' => $date_use]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="panel panel-default">        
         <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" action="{{ route('cost.index') }}">
+          <form class="form-inline" role="form" method="GET" action="{{ route('cost.index') }}">           
             
-            <div class="row">
-              <div class="form-group col-xs-6">
-                <input type="text" class="form-control" autocomplete="off" name="id_search" placeholder="ID" value="{{ $arrSearch['id_search'] }}">
-              </div>
-              <div class="form-group col-xs-6">
-               <select class="form-control select2" name="status" id="status">
-                    <option value="">--Trạng thái--</option>
-                    <option value="1" {{ $arrSearch['status'] == 1 ? "selected" : "" }}>Chưa thanh toán</option>
-                    <option value="2" {{ $arrSearch['status'] == 2 ? "selected" : "" }}>Đã thanh toán</option>
-                    <option value="3" {{ $arrSearch['status'] == 3 ? "selected" : "" }}>Thanh toán sau</option>
-                </select>
-            </div>
-              <div class="form-group col-xs-12">              
-              <select class="form-control select2" name="beach_id" id="beach_id">                  
-                <option value="">--Bãi biển--</option>
-                @foreach($beachList as $beach)
-                <option value="{{ $beach->id }}" {{ $beach_id == $beach->id ? "selected" : "" }}>{{ $beach->name }}</option>
-                @endforeach    
-              </select>
-
-            </div>
+            <input type="text" name="beach_id" value="1">
             <div class="form-group col-xs-6">              
               <select class="form-control select2" name="cate_id" id="cate_id">
                 <option value="">--Loại chi phí--</option>
@@ -52,21 +32,7 @@
                 <option value="{{ $cate->id }}" {{ $arrSearch['cate_id'] == $cate->id ? "selected" : "" }}>{{ $cate->name }}</option>
                 @endforeach
               </select>
-            </div>
-            <div class="form-group col-xs-6" id="load_doi_tac">
-              @if(!empty($partnerList ) || $partnerList->count() > 0)
-            <div class="form-group ">
-                <select class="form-control select2" id="partner_id" name="partner_id">     
-                  <option value="">--Chi tiết--</option>      
-                  @foreach($partnerList as $cate)
-                  <option value="{{ $cate->id }}" {{ $partner_id == $cate->id ? "selected" : "" }}>
-                    {{ $cate->name }}
-                  </option>
-                  @endforeach
-                </select>
-            </div>
-            @endif
-            </div>
+            </div>           
             
             </div>
             <div class="row">
@@ -155,41 +121,7 @@
             {{ $items->appends( $arrSearch )->links() }}
           </div>  
           <div class="table-responsive">
-             @if(Auth::user()->role == 1)
-              <div class="form-inline" style="padding: 5px">
-                <div class="form-group">            
-                  <select class="form-control select2 multi-change-column-value" data-column="type">
-                      <option value="">--SET PHÂN LOẠI--</option>
-                       <option value="1">Vận hành</option>
-                       <option value="2">Khác</option>                 
-                    </select>                         
-                </div> 
-                <div class="form-group">        
-                  <select class="form-control select2 multi-change-column-value" data-column="cate_id">
-                    <option value="">--SET LOẠI CHI PHÍ--</option>
-                    @foreach($cateList as $cate)
-                    <option value="{{ $cate->id }}">{{ $cate->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-                <div class="form-group">            
-                  <select class="form-control select2 multi-change-column-value" data-column="nguoi_chi">
-                      <option value="">--SET NGƯỜI CHI--</option>
-                       @foreach($collecterList as $payer)
-                      <option value="{{ $payer->id }}">{{ $payer->name }}</option>
-                      @endforeach     
-                  </select>                         
-                </div>               
-                <div class="form-group">            
-                  <select class="form-control select2 multi-change-column-value" data-column="status">
-                      <option value="">--SET TRẠNG THÁI--</option>                 
-                      <option value="1">Chưa thanh toán</option>
-                      <option value="2">Đã thanh toán</option>
-                      <option value="3">Thanh toán sau</option>
-                    </select>
-                </div>              
-              </div>
-              @endif
+            
             <div style="font-size: 18px;padding: 10px; border-bottom: 1px solid #ddd">
               Tổng: <span class="value">{{ $items->total() }} mục </span> - Tổng tiền: <span style="color:red">{{ number_format($total_actual_amount) }}</span>           
             </div>

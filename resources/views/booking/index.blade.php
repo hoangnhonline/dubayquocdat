@@ -208,34 +208,7 @@
           <div style="text-align:center">
             {{ $items->appends( $arrSearch )->links() }}
           </div>
-          <div class="form-inline" style="padding: 5px">
-                   
-          <div class="form-group">        
-              <select class="form-control select2 multi-change-column-value" data-column="partner_id">
-                <option value="">--SET ĐỐI TÁC--</option>
-                @foreach($partners as $partner)
-                <option value="{{ $partner->id }}">{{ $partner->name }}</option>
-                @endforeach
-              </select>
-            </div>
-            <div class="form-group">
-              <select class="form-control select2 multi-change-column-value" data-column="nguoi_thu_tien">
-                <option value="">--SET THU TIỀN--</option>
-                @foreach($collecterList as $payer)
-                <option value="{{ $payer->id }}" {{ $arrSearch['nguoi_thu_tien'] == $payer->id ? "selected" : "" }}>{{ $payer->name }}</option>
-                @endforeach
-              </select>
-            </div>
-             <div class="form-group">        
-              <select class="form-control select2 multi-change-column-value" data-column="da_thu">
-                <option value="">--SET ĐÃ THU--</option>
-                <option value="1">Đã thu</option>
-                <option value="0">Chưa thu</option>                
-              </select>
-            </div>
-
-           
-        </div>
+          
           <div class="table-responsive">
           <table class="table table-bordered table-hover" id="table-list-data">
             <tr style="background-color: #f4f4f4">
@@ -246,7 +219,6 @@
               <th width="30%">Dịch vụ</th>
               <th class="text-center" width="120">Ngày</th>
               <th class="text-right" width="100">Tổng tiền</th>
-              <th class="text-right" width="100">Tiền cọc</th>
               <th class="text-right" width="100" >Giảm giá</th>
               <th class="text-right"  width="100">Chiết khấu</th>
               <th class="text-right"  width="100">Còn lại</th>
@@ -264,30 +236,9 @@
                 </td>
                 <td class="text-center"> {{ $l }}</td>
                 <td>
-                  <span style="color: #eea236; font-weight: bold;">BK{{ str_pad($item->booking_id,5,"0",STR_PAD_LEFT) }}</span>
-                  @if($item->bill_no)
-                    - Bill : <span style="color: blue; font-weight: bold">{{ $item->bill_no }}</span>
-                    @endif
-                    @if($item->da_thu == 0)
-                    <span style="text-align: right; float: right;">
-                    <input id="da_thu_{{ $item->id }}" data-table="booking" type="checkbox" data-column="da_thu" class="change-column-value-booking" value="1" data-id="{{ $item->id }}">
-                    <label for="da_thu_{{ $item->id }}" style="color: red"> ĐÃ THU</label>
-                  </span>
-                    @endif
+                  <span style="color: #eea236; font-weight: bold;">BK{{ str_pad($item->booking_id,5,"0",STR_PAD_LEFT) }}</span>                   
                     <br>
-                  {{ $item->name }}  <i class="glyphicon glyphicon-phone"></i> <a href="tel:{{ $item->phone }}" target="_blank">{{ $item->phone }}</a>
-                  <br>
-                  <i class="glyphicon glyphicon-map-marker"></i>
-                  @if($item->beach_id)
-                  {{ $beachArr[$item->beach_id] }}
-                  @endif
-                  @if($item->beach_id == 4)
-                    @if($item->partner_id)
-                      <br/> <i class="glyphicon glyphicon-user"></i> <label class="label label-success label-sm">{{ $item->partner->name }}</label>
-                    @else
-                      <label class="label-sm label-danger label">Chưa chọn đối tác</label>
-                    @endif
-                  @endif
+                  {{ $item->name }}  <i class="glyphicon glyphicon-phone"></i> <a href="tel:{{ $item->phone }}" target="_blank">{{ $item->phone }}</a>                 
                 </td>
                 <td>
                   <table class="table" style="margin-top:5px;margin-bottom: 10px;">
@@ -309,20 +260,12 @@
                  </table>
                 </td>
                 <td class="text-center">
-                  {{ date('d/m/Y', strtotime($item->use_date)) }}
-                  <select class="form-control select2 change-column-value" data-id="{{ $item->id }}" data-column="partner_id" style="width: 100%" data-table="booking">
-                    <option value="">--Đối tác--</option>
-                    @foreach($partners as $partner)
-                    <option value="{{ $partner->id }}" {{ $partner->id == $item->partner_id ? "selected" : "" }}>{{ $partner->name }}</option>
-                    @endforeach
-                  </select>
+                  {{ date('d/m/Y', strtotime($item->use_date)) }}                  
                 </td>
                 <td class="text-right">
                   {{ number_format($item->total_price) }}
                 </td>
-                <td class="text-right">
-                  {{ $item->tien_coc ? number_format($item->tien_coc) : '-' }}
-                </td>
+               
                 <td class="text-right">
                   {{ $item->discount ?number_format($item->discount) : '-' }}
                 </td>
