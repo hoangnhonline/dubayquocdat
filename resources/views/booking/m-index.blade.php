@@ -113,18 +113,21 @@
                 <td class="text-right">
                   {{ number_format($arrData['tong_tien']) }}
                 </td>
-              </tr>
-              <tr>
-                <th>Tổng tiền(0 cam JT)</th>
-                <td class="text-right">
-                  {{ number_format($arrData['tong_tien_ko_cam_jt']) }}
-                </td>
-              </tr>
+              </tr>  
               <?php 
-              $ck_nv = $arrData['tong_tien_ko_cam_jt']*5/100;
+              $tong_tien_nha_hang = $arrData['tong_tien']*18/100;
               ?>
               <tr>
-                <th>5%</th>
+                <th>Tiền nhà hàng</th>
+                <td class="text-right">
+                  {{ number_format($tong_tien_nha_hang) }}
+                </td>
+              </tr>               
+              <?php 
+              $ck_nv = $arrData['tong_tien_du']*5/100;
+              ?>
+              <tr>
+                <th>5% tiền dù</th>
                 <td class="text-right">
                   {{ number_format($ck_nv) }}
                 </td>
@@ -140,13 +143,7 @@
                 <td class="text-right">
                   {{ number_format($arrData['tong_giam']) }}
                 </td>
-              </tr>
-              <tr>
-                <th>Tổng cọc</th>
-                <td class="text-right">
-                  {{ number_format($arrData['tong_tien_coc']) }}
-                </td>
-              </tr>
+              </tr>             
               <tr>
                 <th>Tổng chuyển khoản</th>
                 <td class="text-right">
@@ -164,7 +161,7 @@
                 <th>Tổng tiền mặt</th>
                 <td class="text-right">
                   <?php 
-                  $tong_tien_mat_chua_chi_nv = $arrData['tong_tien'] - $arrData['tong_chuyen_khoan'] - $arrData['tong_tien_coc'] - $chi_tien_mat - $arrData['tong_chietkhau'] - $arrData['tong_giam'];
+                  $tong_tien_mat_chua_chi_nv = $arrData['tong_tien'] - $arrData['tong_chuyen_khoan'] - $arrData['tong_tien_coc'] - $chi_tien_mat - $arrData['tong_chietkhau'] - $arrData['tong_giam'] - $tong_tien_nha_hang;
                   ?>
                   {{ number_format($tong_tien_mat_chua_chi_nv)  }}
                 </td>               
@@ -194,16 +191,8 @@
                  
                     @php $arrEdit = array_merge(['id' => $item->booking_id], $arrSearch) @endphp
                     
-                    <span style="color: #eea236; font-weight: bold;">BK{{ str_pad($item->booking_id,5,"0",STR_PAD_LEFT) }}</span> 
-                    @if($item->bill_no)
-                    - Bill : <span style="color: blue; font-weight: bold">{{ $item->bill_no }}</span>
-                    @endif
-                    @if($item->da_thu == 0)
-                    <span style="text-align: right; float: right;">
-                    <input id="da_thu_{{ $item->id }}" data-table="booking" type="checkbox" data-column="da_thu" class="change-column-value-booking" value="1" data-id="{{ $item->id }}">
-                    <label for="da_thu_{{ $item->id }}" style="color: red"> ĐÃ THU</label>
-                  </span>
-                    @endif
+                    <span style="color: #eea236; font-weight: bold;">BK{{ str_pad($item->booking_id,5,"0",STR_PAD_LEFT) }}</span>                   
+                    
                     <br>
                         <a style="text-transform: uppercase;font-weight:bold;" href="{{ route( 'booking.edit', $arrEdit ) }}">
                        {{ $item->name }}</a>
@@ -242,11 +231,7 @@
                     </span>
                     @endif
                     <br>- Còn lại: {{ number_format($item->con_lai) }}
-                    @if($item->sms_thu)
-                      <p class="alert-success sms">
-                          SMS : {{ $item->sms_thu }}
-                      </p>
-                    @endif
+                    
                     @if($item->notes)                    
                     <br><span style="color:red; font-style: italic;">{!! nl2br($item->notes) !!}</span>
                     @endif    

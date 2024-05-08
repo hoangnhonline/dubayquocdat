@@ -732,7 +732,8 @@ class BookingController extends Controller
             'ck_20' => 0,
             'tong_cam' => 0,
             'tong_du_doi' => 0,
-            'tong_du_don' => 0
+            'tong_du_don' => 0,
+            'tong_tien_du' => 0
         ];
         foreach($allList as $item){
             $arrData['tong_bk']++;
@@ -740,6 +741,10 @@ class BookingController extends Controller
             $arrData['tong_chietkhau'] += $item->commision;
 
             foreach($item->details as $detail){
+                $cateDetail = Cate::find($detail->cate_id);
+                if($cateDetail->is_para == 1){
+                    $arrData['tong_tien_du'] += $detail->amount;
+                }
                 if($detail->cate_id == 68){
                     $arrData['tong_du_doi'] += $detail->amount;
                 }
