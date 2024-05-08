@@ -169,7 +169,7 @@ body {
 <div class="module form-module"> 
   <div class="form">
   <div style="text-align: center">    
-    <img src="{{ asset('assets/images/logo.png') }}" width="250"> 
+    <img src="{{ asset('images/logo.png') }}" width="250"> 
   </div>
     @if(Session::has('error'))
         <div class="alert alert-danger">
