@@ -873,8 +873,7 @@ class BookingController extends Controller
         ]);
 
         $dataArr['total_price'] =(int) str_replace(',', '', $dataArr['total_price']);
-        $dataArr['commision'] = (int) str_replace(',', '', $dataArr['commision']);
-        $dataArr['tien_coc'] = (int) str_replace(',', '', $dataArr['tien_coc']);
+        $dataArr['commision'] = (int) str_replace(',', '', $dataArr['commision']);        
         $dataArr['discount'] = (int) str_replace(',', '', $dataArr['discount']);
         $dataArr['con_lai'] = (int) str_replace(',', '', $dataArr['con_lai']);
         $dataArr['phone'] = str_replace('.', '', $dataArr['phone']);
@@ -977,8 +976,7 @@ class BookingController extends Controller
         ]);
 
         $dataArr['total_price'] =(int) str_replace(',', '', $dataArr['total_price']);
-        $dataArr['commision'] = (int) str_replace(',', '', $dataArr['commision']);
-        $dataArr['tien_coc'] = (int) str_replace(',', '', $dataArr['tien_coc']);
+        $dataArr['commision'] = (int) str_replace(',', '', $dataArr['commision']);        
         $dataArr['discount'] = (int) str_replace(',', '', $dataArr['discount']);
         $dataArr['con_lai'] = (int) str_replace(',', '', $dataArr['con_lai']);
         $dataArr['phone'] = str_replace('.', '', $dataArr['phone']);

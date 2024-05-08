@@ -43,40 +43,8 @@
                       </ul>
                   </div>
               @endif
-               <div class="row">
-                 <div class="form-group col-md-12">
-                      <label style="font-weight: bold; color: red">
-                        <input type="checkbox" id="da_thu" name="da_thu" value="1" {{ old('da_thu', $detail->da_thu) == 1 ? "checked" : "" }}>
-                        ĐÃ THU TIỀN
-                      </label>
-                  </div>
-                  <div class="form-group col-md-12">
-                       <label>Trạng thái <span class="red-star">*</span></label>
-                        <select class="form-control" name="status" id="status">
-                          <option value="1" {{ old('status', $detail->status) == 1 ? "selected" : "" }}>Mới</option>
-                          <option value="2" {{ old('status', $detail->status) == 2 ? "selected" : "" }}>Hoàn tất</option>
-                          <option value="3" {{ old('status', $detail->status) == 3 ? "selected" : "" }}>Hủy</option>
-                        </select>
-                  </div>
-                </div>
-              <div class="row">
-                <div class="form-group col-md-6 col-xs-6">
-                   <label>Bãi biển</label>
-                      <select name="beach_id" id="beach_id" class="form-control select2">
-                        @foreach($beachList as $beach)
-                        <option value="{{ $beach->id }}" {{ old('beach_id', $detail->beach_id) == $beach->id ? "selected" : "" }}>{{ $beach->name }}</option>
-                        @endforeach     
-                      </select>
-                 </div>
-                <div class="form-group col-md-6 col-xs-6">
-                  <label>Đối tác</label>
-                  <select name="partner_id" id="partner_id" class="form-control select2">
-                    <option value="" {{ !old('partner_id', $detail->partner_id) ? "selected" : "" }}>-- Chọn đối tác --</option>
-                    @foreach($partners as $partner)
-                      <option value="{{ $partner->id }}" {{ old('partner_id', $detail->partner_id) == $partner->id ? "selected" : "" }}>{{ $partner->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
+               
+              <div class="row">               
                  <div class="form-group col-md-6 col-xs-6">
                     <label>Ngày chơi <span class="red-star">*</span></label>
                     <input type="text" class="form-control datepicker" name="use_date" id="use_date" value="{{ $use_date }}" autocomplete="off">
@@ -175,20 +143,7 @@
                       <label>Tiền chiết khấu</label>
                     <input type="text" class="form-control number" name="commision" id="commision" value="{{ old('commision', $detail->commision) }}">
                   </div>
-                  <div class="form-group col-md-6 col-xs-6">
-                      <label>Tiền cọc</label>
-                    <input type="text" class="form-control number" name="tien_coc" id="tien_coc" value="{{ old('tien_coc', $detail->tien_coc) }}">
-                  </div>
-                  <div class="form-group col-md-6 col-xs-6">
-                      <label>Người thu cọc</label>
-                      <select class="form-control select2" name="nguoi_thu_coc" id="nguoi_thu_coc">
-                        <option value="">--Chọn--</option>
-                        <option value="1" {{ old('nguoi_thu_coc', $detail->nguoi_thu_coc) == 1 ? "selected" : "" }}>Sales</option>
-                        <option value="2" {{ old('nguoi_thu_coc', $detail->nguoi_thu_coc) == 2 ? "selected" : "" }}>CTY</option>
-                        <option value="3" {{ old('nguoi_thu_coc', $detail->nguoi_thu_coc) == 3 ? "selected" : "" }}>A Phương</option>
-                        <option value="4" {{ old('nguoi_thu_coc', $detail->nguoi_thu_coc) == 4 ? "selected" : "" }}>Tiền mặt</option>
-                      </select>
-                  </div>
+                 
                    <div class="form-group col-md-6 col-xs-6" >
                       <label>CÒN LẠI</label>
                       <input type="text" class="form-control number" name="con_lai" id="con_lai" value="{{ old('con_lai', $detail->con_lai) }}">
