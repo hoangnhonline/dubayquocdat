@@ -743,7 +743,7 @@ class BookingController extends Controller
             foreach($item->details as $detail){
                 $cateDetail = Cate::find($detail->cate_id);
                 if($cateDetail->is_para == 1){
-                    $arrData['tong_tien_du'] += $detail->amount;
+                    $arrData['tong_tien_du'] += $detail->total_price;
                 }
                 if($detail->cate_id == 68){
                     $arrData['tong_du_doi'] += $detail->amount;
