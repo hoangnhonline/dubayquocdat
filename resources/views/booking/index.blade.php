@@ -35,12 +35,7 @@
       <div class="panel panel-default">
 
         <div class="panel-body" style="padding: 5px !important;">
-          <form class="form-inline" role="form" method="GET" action="{{ route('booking.index') }}" id="searchForm" style="margin-bottom: 0px;">
-
-            <div class="form-group">
-              <input type="text" class="form-control" autocomplete="off" name="id_search" placeholder="PTT ID" value="{{ $arrSearch['id_search'] }}" style="width: 70px">
-            </div>
-            
+          <form class="form-inline" role="form" method="GET" action="{{ route('booking.index') }}" id="searchForm" style="margin-bottom: 0px;">            
             <div class="form-group">
               <select class="form-control select2" name="time_type" id="time_type">
                 <option value="">--Thời gian--</option>
@@ -60,8 +55,7 @@
               </div>
               <div class="form-group  chon-thang">
                 <select class="form-control select2" id="year_change" name="year">
-                  <option value="">--NĂM--</option>
-                  <option value="2023" {{ $year == 2023 ? "selected" : "" }}>2023</option>
+                  <option value="">--NĂM--</option>                  
                   <option value="2024" {{ $year == 2024 ? "selected" : "" }}>2024</option>
                   <option value="2025" {{ $year == 2025 ? "selected" : "" }}>2025</option>
                 </select>
@@ -77,22 +71,8 @@
             </div>
              @endif
             @endif
-            <div class="form-group">
-                <select name="partner_id" class="form-control select2">
-                    <option value="" {{ !old('partner_id') ? "selected" : "" }}>-- Đối tác</option>
-                    @foreach($partners as $partner)
-                        <option value="{{ $partner->id }}" {{ $partner_id == $partner->id ? "selected" : "" }}>{{ $partner->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-              <select name="cate_id" class="form-control select2">
-                    <option value="">-Dịch vụ-</option>
-                    @foreach($cateList as $cate)
-                      <option value="{{ $cate->id }}" {{ $cate->id == $cate_id ? "selected" : "" }}>{{ $cate->name }}</option>
-                    @endforeach
-              </select>
-            </div>
+          
+            
             <div class="form-group">
               <select class="form-control select2" name="nguoi_thu_tien" id="nguoi_thu_tien">
                 <option value="">--Người thu tiền--</option>
@@ -106,7 +86,7 @@
               <button type="button" id="btnReset" class="btn btn-default btn-sm">Reset</button>
             </div>
 
-            <div>
+            <div style="display: none;">
               @foreach($beachList as $beach)
                 <div class="form-group">
                   &nbsp;&nbsp;&nbsp;<input type="checkbox" name="beach_ids[]" id="beach_ids" {{ in_array($beach->id, $arrSearch['beach_ids']) || empty($arrSearch['beach_ids']) ? "checked" : "" }} value="{{$beach->id}}">
@@ -115,13 +95,7 @@
               @endforeach
             </div>
 
-            <div>
-               <div class="form-group">
-                      <label style="font-weight: bold; color: red">
-                        <input type="checkbox" id="da_thu" name="da_thu" value="1" {{ old('da_thu') == 1 ? "checked" : "" }}>
-                        ĐÃ THU TIỀN
-                      </label>
-                  </div>
+            <div>             
               <div class="form-group">
               &nbsp;&nbsp;&nbsp;<input type="checkbox" name="status[]" id="status_1" {{ in_array(1, $arrSearch['status']) ? "checked" : "" }} value="1">
               <label for="status_1">Mới</label>
@@ -146,20 +120,15 @@
               <tr style="background-color: #f4f4f4">
                 <th class="text-center">Tổng BK</th>
                 <th class="text-right">Tổng tiền</th>
-                <th class="text-right">Dù đôi</th>
-                <th class="text-right">Dù đơn</th>
-                <th class="text-right">Tiền flycam</th>
-                <th class="text-right">Tổng KO CAM</th>
-                <th class="text-right">CK John</th>
+                <th class="text-right">CK Nhà hàng</th>
                 <th class="text-right">CK SSB</th>
-                <th class="text-right">CK 5%</th>
+                <th class="text-right">CK 5% dù</th>
                 <th class="text-right">Tổng giảm</th>
-                <th class="text-right">Tổng cọc</th>
                 <th class="text-right">Tổng chiết khấu</th>
-                <th class="text-right">Tổng CK</th>
+                <th class="text-right">Tổng chuyển khoản</th>
                 <th class="text-right">Chi tiền mặt</th>
                 <th class="text-right">Tổng tiền mặt</th>
-                <th class="text-right">Tiền mặt(đã chi 5%)</th>
+                <th class="text-right">Tiền mặt(đã chi 5% dù)</th>
                 @if($time_type == 1)
                 <th class="text-right">Chi CK</th>
                 @endif
@@ -173,34 +142,16 @@
                   {{ number_format($arrData['tong_tien']) }}
                 </td>
                 <td class="text-right">
-                  {{ number_format($arrData['tong_du_doi']) }}
-                </td>
-                <td class="text-right">
-                  {{ number_format($arrData['tong_du_don']) }}
-                </td>
-                <td class="text-right">
-                  {{ number_format($arrData['tong_cam']) }}
-                </td>
-                <td class="text-right">
-                  {{ number_format($arrData['tong_tien_ko_cam_jt']) }}
-                </td>
-                <td class="text-right">
-                  {{ number_format($arrData['ck_john']) }}
-                </td>
-                <td class="text-right">
-                  {{ number_format($arrData['ck_20']) }}
+                  {{ number_format($arrData['ck_10']) }}
                 </td>
                 <?php
-              $ck_nv = $arrData['tong_tien']*5/100;
+              $ck_nv = $arrData['tong_tien_du']*5/100;
               ?>
                 <td class="text-right">
                   {{ number_format($ck_nv) }}
                 </td>
                 <td class="text-right">
                   {{ number_format($arrData['tong_giam']) }}
-                </td>
-                <td class="text-right">
-                  {{ number_format($arrData['tong_tien_coc']) }}
                 </td>
                 <td class="text-right">
                   {{ number_format($arrData['tong_chietkhau']) }}
@@ -214,7 +165,7 @@
                 </td>
                 <td class="text-right">
                   <?php
-                  $tong_tien_mat_chua_chi_nv = $arrData['tong_tien'] - $arrData['tong_chuyen_khoan'] - $arrData['tong_tien_coc'] - $chi_tien_mat - $arrData['tong_chietkhau'] - $arrData['tong_giam'];
+                  $tong_tien_mat_chua_chi_nv = $arrData['tong_tien'] - $arrData['tong_chuyen_khoan'] - $arrData['tong_tien_coc'] - $chi_tien_mat - $arrData['tong_chietkhau'];
                   $tien_mat_da_chi_nv = $tong_tien_mat_chua_chi_nv - $ck_nv;
                   ?>
                   {{ number_format($tong_tien_mat_chua_chi_nv)  }}

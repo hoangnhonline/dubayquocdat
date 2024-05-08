@@ -30,24 +30,8 @@
           
           <form class="form-inline" role="form" method="GET" action="{{ route('booking.index') }}" id="searchForm">
             
-             <div class="row">
-               <div class="form-group col-xs-6"  style="padding-right: 0px;">
-                <input type="text" class="form-control" autocomplete="off" name="id_search" value="{{ $arrSearch['id_search'] }}" placeholder="CODE" >
-              </div>
-              <div class="form-group col-xs-6" style="padding-left: 5px;">
-                <input type="text" class="form-control" name="phone" value="{{ $arrSearch['phone'] }}" placeholder="Số ĐT">
-              </div>
-             </div>
-            
             <div class="row">
-              <div>
-                @foreach($beachList as $beach)
-                  <div class="form-group">
-                    &nbsp;&nbsp;&nbsp;<input type="checkbox" name="beach_ids[]" id="beach_ids" {{ in_array($beach->id, $arrSearch['beach_ids']) || empty($arrSearch['beach_ids']) ? "checked" : "" }} value="{{$beach->id}}">
-                    <label for="beach_ids">{{$beach->name}}</label>
-                  </div>
-                @endforeach
-              </div>
+              
               <div class="form-group @if($time_type == 3) col-xs-6 @else col-xs-4 @endif" style="padding-right: 0px">              
                 <select class="form-control select2" name="time_type" id="time_type">                  
                   <option value="">--Thời gian--</option>
@@ -67,8 +51,7 @@
               </div>
               <div class="form-group col-xs-4 chon-thang" style="padding-left: 5px">                
                 <select class="form-control select2" id="year_change" name="year">
-                  <option value="">--NĂM--</option>                            
-                  <option value="2023" {{ $year == 2023 ? "selected" : "" }}>2023</option>
+                  <option value="">--NĂM--</option>                                             
                   <option value="2024" {{ $year == 2024 ? "selected" : "" }}>2024</option>
                   <option value="2025" {{ $year == 2025 ? "selected" : "" }}>2025</option>
                 </select>
@@ -87,40 +70,14 @@
             @endif
             </div>   
             <div class="row">         
-              <div class="form-group col-xs-6"  style="padding-right: 0px">
+              <div class="form-group col-xs-12"  style="padding-right: 0px">
                 <select class="form-control select2" name="nguoi_thu_tien" id="nguoi_thu_tien">
                   <option value="">-Người thu tiền-</option>
                   @foreach($collecterList as $payer)
                   <option value="{{ $payer->id }}" {{ $arrSearch['nguoi_thu_tien'] == $payer->id ? "selected" : "" }}>{{ $payer->name }}</option>
                   @endforeach
                 </select>
-              </div>
-              <div class="form-group col-xs-6"  style="padding-left: 5px">
-                <select class="form-control select2" name="nguoi_thu_coc" id="nguoi_thu_coc">
-                  <option value="">-Người thu cọc-</option>
-                  @foreach($collecterList as $payer)
-                  <option value="{{ $payer->id }}" {{ $arrSearch['nguoi_thu_coc'] == $payer->id ? "selected" : "" }}>{{ $payer->name }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-12">
-                <select class="form-control select2" name="per_com" id="per_com">
-                  <option value="">--Chiết khấu--</option>
-                  @foreach($chietkhauList as $ck)
-                  <option value="{{ $ck->value }}" {{ $arrSearch['per_com'] == $ck->value ? "selected" : "" }}>{{ $ck->name }}</option>
-                  @endforeach
-                </select>
-              </div> 
-            </div>
-            <div class="row">
-               <div class="form-group col-md-12">
-                      <label style="font-weight: bold; color: red">
-                        <input type="checkbox" id="da_thu" name="da_thu" value="0" {{ $arrSearch['da_thu'] == 0 ? "checked" : "" }}>
-                        CHƯA THU TIỀN
-                      </label>
-                  </div>
+              </div>              
             </div>
             
             <div class="row" style="font-size: 12px;">
