@@ -250,28 +250,10 @@
                 @endphp 
                     
                    <a style="float:right; margin-left: 2px" href="{{ route( 'booking.edit', $arrEdit ) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
-
-                   <a style="float:right;" class="btn btn-info btn-sm" href="{{ route('view-pdf', ['id' => $item->booking_id])}}" target="_blank"><i class="fa fa-newspaper-o"></i></a> 
-
-
-                    @if($item->nguoi_thu_tien != 1)
-                  <button class="btn btn-sm btn-info btnUnc" data-id="{{ $item->booking_id }}">{{ $countUNC }} UNC</button>
-                  @endif  
-                     <!--  <a style="float: left;" target="_blank" href="{{ route('history.booking', ['id' => $item->booking_id]) }}">Xem lịch sử</a> -  -->
-                      @if($countUNC > 0 && $item->nguoi_thu_tien != 1)
-                    @php
-                    foreach($item->payment as $pay){
-                      $paymet = $pay;
-                    }
-                    $image_url = $paymet->image_url;
-                    @endphp 
-                    <span style="color: blue; cursor: pointer;" class="img-unc" data-src="{{ config('plantotravel.upload_url').$image_url }}">XEM UNC</span>- 
-                    @endif
-                     <a href="https://img.vietqr.io/image/MBBank-00901424868-compact2.png?amount=&accountName=NGUYEN HUY HOANG&addInfo=PQSP {{ $item->id }}"
-                                       class="btn btn-primary btn-sm btn-qrcode"><span
-                                            class="glyphicon glyphicon-qrcode"></span></a>
-                    
+                     
+                    <a onclick="return callDelete('{{ $item->title }}','{{ route( 'booking.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
                       <div style="clear: both;"></div>
+                      <a onclick="return callDelete('{{ $item->title }}','{{ route( 'booking.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
                 </li>              
               @endforeach
             @else
