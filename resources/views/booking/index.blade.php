@@ -120,8 +120,7 @@
               <tr style="background-color: #f4f4f4">
                 <th class="text-center">Tổng BK</th>
                 <th class="text-right">Tổng tiền</th>
-                <th class="text-right">CK Nhà hàng</th>
-                <th class="text-right">CK SSB</th>
+                <th class="text-right">CK Nhà hàng</th>               
                 <th class="text-right">CK 5% dù</th>
                 <th class="text-right">Tổng giảm</th>
                 <th class="text-right">Tổng chiết khấu</th>
@@ -142,7 +141,7 @@
                   {{ number_format($arrData['tong_tien']) }}
                 </td>
                 <td class="text-right">
-                  {{ number_format($arrData['ck_10']) }}
+                  {{ number_format($arrData['tong_tien']*18/100) }}
                 </td>
                 <?php
               $ck_nv = $arrData['tong_tien_du']*5/100;
