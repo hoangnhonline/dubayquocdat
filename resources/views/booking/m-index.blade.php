@@ -70,7 +70,7 @@
             @endif
             </div>   
             <div class="row">         
-              <div class="form-group col-xs-12"  style="padding-right: 0px">
+              <div class="form-group col-xs-12">
                 <select class="form-control select2" name="nguoi_thu_tien" id="nguoi_thu_tien">
                   <option value="">-Người thu tiền-</option>
                   @foreach($collecterList as $payer)
