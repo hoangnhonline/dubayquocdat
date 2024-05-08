@@ -6,7 +6,7 @@
       <img src="{{ asset('images/logo-small.png')}}" width="45" style="margin-top: 5px;">
     </span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>PQ SEA SPORTS</b></span>
+    <span class="logo-lg"><b>DÙ BAY QUỐC ĐẠT</b></span>
   </a>
   <!-- Header Navbar: style can be found in header.less -->
   @if(!isset($codeUser))
