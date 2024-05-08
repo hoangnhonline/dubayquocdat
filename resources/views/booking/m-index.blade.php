@@ -157,15 +157,7 @@
                   {{ number_format($chi_tien_mat) }}
                 </td>               
               </tr>
-              <tr>
-                <th>Tổng tiền mặt</th>
-                <td class="text-right">
-                  <?php 
-                  $tong_tien_mat_chua_chi_nv = $arrData['tong_tien'] - $arrData['tong_chuyen_khoan'] - $arrData['tong_tien_coc'] - $chi_tien_mat - $arrData['tong_chietkhau'] - $arrData['tong_giam'] - $tong_tien_nha_hang;
-                  ?>
-                  {{ number_format($tong_tien_mat_chua_chi_nv)  }}
-                </td>               
-              </tr>
+           
               <tr>
                 <th>Tiền mặt (sau chi 5%)</th>
                 <td class="text-right">

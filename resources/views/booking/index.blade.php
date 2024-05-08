@@ -140,8 +140,11 @@
                 <td class="text-right">
                   {{ number_format($arrData['tong_tien']) }}
                 </td>
+                <?php 
+                $ck_nhahang = $arrData['tong_tien']*18/100;
+                ?>
                 <td class="text-right">
-                  {{ number_format($arrData['tong_tien']*18/100) }}
+                  {{ number_format($ck_nhahang) }}
                 </td>
                 <?php
               $ck_nv = $arrData['tong_tien_du']*5/100;
@@ -181,7 +184,7 @@
                 </td>
                 @else
                 <td class="text-right">
-                  {{ number_format($tien_mat_da_chi_nv + $arrData['tong_tien_coc'] + $arrData['tong_chuyen_khoan']) }}
+                  {{ number_format($tien_mat_da_chi_nv + $arrData['tong_tien_coc'] + $arrData['tong_chuyen_khoan'] - $ck_nhahang) }}
                 </td>
                 @endif
               </tr>
