@@ -877,8 +877,7 @@ class BookingController extends Controller
         $dataArr['discount'] = (int) str_replace(',', '', $dataArr['discount']);
         $dataArr['con_lai'] = (int) str_replace(',', '', $dataArr['con_lai']);
         $dataArr['phone'] = str_replace('.', '', $dataArr['phone']);
-        $dataArr['phone'] = str_replace(' ', '', $dataArr['phone']);
-        $dataArr['da_thu'] = isset($dataArr['da_thu']) ? 1 : 0;
+        $dataArr['phone'] = str_replace(' ', '', $dataArr['phone']);        
         $tmpDate = explode('/', $dataArr['use_date']);
 
         $dataArr['use_date'] = $tmpDate[2].'-'.$tmpDate[1].'-'.$tmpDate[0];
@@ -981,7 +980,7 @@ class BookingController extends Controller
         $dataArr['con_lai'] = (int) str_replace(',', '', $dataArr['con_lai']);
         $dataArr['phone'] = str_replace('.', '', $dataArr['phone']);
         $dataArr['phone'] = str_replace(' ', '', $dataArr['phone']);
-        $dataArr['da_thu'] = isset($dataArr['da_thu']) ? 1 : 0;
+        
         $tmpDate = explode('/', $dataArr['use_date']);
 
         $dataArr['use_date'] = $tmpDate[2].'-'.$tmpDate[1].'-'.$tmpDate[0];
